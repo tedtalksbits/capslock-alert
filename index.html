@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body,
+            h1,
+            h2,
+            h3,
+            h4,
+            p,
+            figure,
+            blockquote,
+            dl,
+            dd {
+                margin: 0;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                max-width: 99ch;
+                padding: 2rem;
+                margin: 0 auto;
+            }
+
+            input {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            input:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(0, 115, 255, 0.5);
+            }
+            .invalid {
+                box-shadow: 0 0 0 2px rgb(237, 99, 0);
+            }
+            .invalid::placeholder {
+                color: rgb(237, 99, 0);
+            }
+
+            .invalid:focus {
+                box-shadow: 0 0 0 2px rgb(237, 99, 0);
+            }
+            .invalid:active {
+                box-shadow: 0 0 0 2px rgb(237, 99, 0);
+            }
+
+            .invalid:focus::placeholder {
+                color: rgb(237, 99, 0);
+            }
+            .invalid-text {
+                color: rgb(237, 99, 0);
+                display: none;
+            }
+            .invalid + .invalid-text {
+                color: rgb(237, 99, 0);
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="">
+            <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter your username"
+            />
+            <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter your password"
+            />
+            <span class="invalid-text"> Caps lock is on </span>
+            <input type="submit" value="Submit" />
+        </form>
+
+        <script>
+            // check if caps lock is on
+            const password = document.getElementById('password');
+            const username = document.getElementById('username');
+
+            password.addEventListener('keyup', (e) => {
+                if (e.getModifierState('CapsLock')) {
+                    console.log('Caps lock is on');
+                    // set password pseudo class invalid
+                    password.classList.add('invalid');
+                } else {
+                    password.classList.remove('invalid');
+                    console.log('Caps lock is off');
+                }
+            });
+        </script>
+    </body>
+</html>
